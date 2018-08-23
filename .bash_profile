@@ -21,7 +21,6 @@
 
 #   Change Prompt
 #   ------------------------------------------------------------
-# export PS1="________________________________________________________________________________\n| \w @ \h (\u) \n| => "
     export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "
     export PS2="| => "
 
@@ -64,7 +63,7 @@ alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
-alias edit='subl'                           # edit:         Opens any file in sublime editor
+alias edit='atom'                           # edit:         Opens any file in Atom editor
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
@@ -78,7 +77,7 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 
-alias weather="curl -s 'http://rss.accuweather.com/rss/liveweather_rss.asp?metric=1&locCode=en|us|moyock-nc|27958' | sed -n"
+forecast(){ /usr/bin/curl -4 wttr.in/$@;}
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------
@@ -256,6 +255,19 @@ alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when boo
 #    screensaverDesktop: Run a screensaver on the Desktop
 #   -----------------------------------------------------------------------------------
     alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+
+    function duh {
+    	du -sk "$@" | sort -n;
+    	du -sk "$@" | sort -n | while read size fname; do
+    		for unit in KiB MiB GiB TiB PiB EiB ZiB YiB; do
+    			if [ "$size" -lt 1024 ]; then
+    				echo -e "${size}${unit}\t${fname}";
+    				break;
+    			fi;
+    			size=$((size/1024));
+    		done;
+    	done;
+    }
 
 #   ---------------------------------------
 #   8. WEB DEVELOPMENT
