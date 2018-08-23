@@ -203,7 +203,7 @@ ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name end
 #   ---------------------------
 
 alias myip='curl ipv4bot.whatismyipaddress.com'     # myip:         Public facing IP Address
-alias localip='ifconfig | grep "inet 10."'          # localip:      Local LAN IP Address
+alias localip='ipconfig getifaddr en0'          # localip:      Local LAN IP Address
 alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
 alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
 alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
@@ -228,7 +228,7 @@ alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rul
         echo -e "\n${PURPLE}Machine stats :$GREEN " ; uptime
         echo -e "\n${PURPLE}Current network location :$GREEN " ; scselect
         echo -e "\n${PURPLE}Public facing IP Address :$GREEN " ; myip
-        echo -e "\n${PURPLE}Local LAN IP Address :$GREEN " ;localip
+        echo -e "\n\n${PURPLE}Local LAN IP Address :$GREEN " ;localip
         #echo -e "\n${PURPLE}DNS Configuration:$GREEN " ; scutil --dns
         echo -e "\n$NC"
     }
